@@ -5,7 +5,7 @@ import Cookie from "cookie-universal"
 
 export const getUserAuth = async(dispatch:any,data:{name:string, email:string,image:string})=>{
     const users = await findUserAuth()
-    const repeatUser:any = users.find(ele => ele.email===data?.email);
+    const repeatUser:any = users.find(ele => ele.email===data?.email && ele.username === data?.name && ele.image === data?.image);
     const cookie = Cookie()
     if(repeatUser){
         localStorage.userToken = repeatUser.id;
