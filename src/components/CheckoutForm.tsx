@@ -50,7 +50,7 @@ const CheckoutForm = ({amount}:{amount:number}) => {
             clientSecret,
             elements,
             confirmParams: {
-                return_url: "http://localhost:3000/payment-confirm",
+                return_url: "https://next-js-e-commerce-two-blush.vercel.app/payment-confirm",
             },
         });
 
