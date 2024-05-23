@@ -33,7 +33,7 @@ const Page = () => {
         <div className="mt-20">
             <div className="bg-bodyBG min-h-[83vh] py-10 flex items-center justify-center">
                 <div className="container">
-                    <div className="bg-footerBg p-4 py-5 max-w-[450px] mx-auto rounded">
+                    <div className="bg-footerBg p-4 py-5 max-w-[450px] mx-auto rounded-lg">
                         <div>
                             <h1 className="text-white text-2xl text-center">Sign Up</h1>
                         </div>
@@ -69,7 +69,7 @@ const Page = () => {
                                     <p className="text-red-button text-sm animate-bounce h-3">Password must be less than 20 characters</p>
                                 }
                             </div>
-                            <button className="bg-blue-button text-white p-[6px] px-3 cursor-pointer rounded" disabled={load}>
+                            <button className="bg-blue-button text-white p-[6px] px-3 cursor-pointer rounded-md" disabled={load}>
                                 {
                                     load ? 
                                     <span>

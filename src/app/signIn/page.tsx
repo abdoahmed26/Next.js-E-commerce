@@ -15,7 +15,7 @@ const Page = () => {
     const router = useRouter()
     const dispatch = useDispatch();
     const [load,setLoad] = useState<boolean>(false)
-    const {register,handleSubmit} = useForm()
+    const {register,formState: { errors },handleSubmit} = useForm()
     const cookie = Cookie()
     const onSubmit = async(data:any) => {
         setLoad(true)
@@ -44,7 +44,7 @@ const Page = () => {
                 <div className="container">
                     <div className="bg-footerBg p-4 py-5 max-w-[450px] mx-auto rounded-lg">
                         <div>
-                            <h1 className="text-white text-2xl text-center">SignIn</h1>
+                            <h1 className="text-white text-2xl text-center">Sign In</h1>
                         </div>
                         <div className="flex justify-center gap-3 my-3">
                             <LoginWithGoogle/>
@@ -53,13 +53,19 @@ const Page = () => {
                         <form action="" onSubmit={handleSubmit(onSubmit)}>
                             <div className="flex flex-col gap-1 mb-4">
                                 <label htmlFor="email" className="text-white">Email address</label>
-                                <input type="email" id="email" {...register("email")} className="w-full h-8 bg-white outline-none rounded px-2"/>
+                                <input type="email" id="email" {...register("email", { required: true })} className="w-full h-8 bg-white outline-none rounded px-2"/>
+                                {errors.email?.type === "required" && 
+                                    <p className="text-red-button text-sm animate-bounce h-3">Email Address is required</p>
+                                }
                             </div>
                             <div className="flex flex-col gap-1 mb-4">
                                 <label htmlFor="pass" className="text-white">Password</label>
-                                <input type="password" id="pass" {...register("password")} className="w-full h-8 bg-white outline-none rounded px-2"/>
+                                <input type="password" id="pass" {...register("password", { required: true })} className="w-full h-8 bg-white outline-none rounded px-2"/>
+                                {errors.password?.type === "required" && 
+                                    <p className="text-red-button text-sm animate-bounce h-3">Password is required</p>
+                                }
                             </div>
-                            <button className="bg-blue-button text-white p-[6px] px-3 cursor-pointer rounded" disabled={load}>
+                            <button className="bg-blue-button text-white p-[6px] px-3 cursor-pointer rounded-md" disabled={load}>
                                 {
                                     load ? 
                                     <span>
