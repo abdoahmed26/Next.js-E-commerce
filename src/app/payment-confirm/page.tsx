@@ -2,13 +2,16 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
-// import { useEffect } from 'react';
-// import { sendEmail } from '@/functions/sendEmail';
+import { useEffect } from 'react';
+import { sendEmail } from '@/functions/sendEmail';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
 const Page = () => {
-    // useEffect(()=>{
-    //     sendEmail();
-    // },[])
+    const user:any = useSelector((state:RootState) => state.user);
+    useEffect(()=>{
+        sendEmail(user);
+    },[user?.email])
     return (
         <div className='mt-24 md:mt-20 bg-bodyBG min-h-[83vh] py-10 flex justify-center items-center'>
             <div className="container">

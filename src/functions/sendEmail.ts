@@ -1,17 +1,18 @@
-import axios from "axios";
-import { getOrder, getUser } from "../../actions/userActions";
+import emailjs from '@emailjs/browser';
 
-let amount=0;
-export const sendEmail = async()=>{
-    const orders = await getOrder(localStorage.userToken);
-    orders.map((ele:any)=>amount +=ele.price*ele.quantity);
-    const users = await getUser();
-    const repeatUser:any = users.find((ele:any)=>ele.id===localStorage.userToken);
+export const sendEmail = async(user:any)=>{
     const data = {
-        email:repeatUser?.email,
-        username:repeatUser?.username,
-        amount:amount,
-        orders:orders,
+        name : user.username,
+        team : "Abdo E-Commerce",
+        email : user.email,
     }
-    axios.post("api/send-email",data).then(res=>res)
+    const serviceId = "service_8c8ja39";
+    const templateId = "template_9ao5ect";
+    const publicKey = "oo_nwc5PfiwLC9n_5";
+    emailjs.send(serviceId, templateId, data, publicKey)
+    .then(res=>{
+        console.log(res)
+    }).catch(error=>{
+        console.log(error);
+    });
 }
